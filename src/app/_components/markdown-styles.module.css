@@ -1,0 +1,78 @@
+.markdown {
+  @apply text-lg leading-relaxed text-gray-300;
+}
+
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown blockquote {
+  @apply my-6;
+}
+
+.markdown h2 {
+  @apply text-3xl mt-12 mb-4 leading-snug text-cyber-cyan font-bold;
+}
+
+.markdown h3 {
+  @apply text-2xl mt-8 mb-4 leading-snug text-cyber-pink;
+}
+
+.markdown h1 {
+  @apply text-4xl mt-12 mb-6 leading-tight font-bold;
+  background: linear-gradient(90deg, #00d9ff 0%, #ff006e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.markdown a {
+  @apply text-cyber-cyan hover:text-cyber-pink transition-colors duration-300 underline;
+}
+
+.markdown strong {
+  @apply text-white font-bold;
+}
+
+.markdown em {
+  @apply text-cyber-yellow;
+}
+
+.markdown code {
+  @apply bg-cyber-dark-alt text-cyber-green px-2 py-1 rounded text-sm;
+}
+
+.markdown pre {
+  @apply bg-cyber-dark-alt border border-cyber-cyan/30 rounded-lg p-4 overflow-x-auto my-6;
+}
+
+.markdown pre code {
+  @apply bg-transparent p-0;
+}
+
+.markdown blockquote {
+  @apply border-l-4 border-cyber-pink pl-6 italic text-gray-400;
+}
+
+.markdown ul {
+  @apply list-disc list-inside;
+}
+
+.markdown ol {
+  @apply list-decimal list-inside;
+}
+
+.markdown li {
+  @apply mb-2;
+}
+
+.markdown hr {
+  @apply border-cyber-cyan/30 my-8;
+}
+
+.markdown img {
+  @apply rounded-lg border-2 border-cyber-cyan/30 my-6 transition-all duration-300 cursor-pointer;
+}
+
+.markdown img:hover {
+  @apply border-cyber-pink shadow-[0_0_20px_rgba(255,0,110,0.3)] transform scale-[1.02];
+}

@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Synthwave Theme Variables */
+:root {
+  --cyber-dark: #1a1d2e;
+  --cyber-dark-alt: #2a2d47;
+  --cyber-cyan: #00d9ff;
+  --cyber-pink: #ff006e;
+  --cyber-purple: #8b00ff;
+  --cyber-orange: #ff8c00;
+  --cyber-yellow: #ffd700;
+  --cyber-green: #39ff14;
+  --text-primary: #ffffff;
+  --text-secondary: #a0a0a0;
+}
+
+/* Global Styles */
+body {
+  background-color: var(--cyber-dark);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Dark mode background */
+.dark body {
+  background-color: var(--cyber-dark);
+}
+
+/* Neon Glow Effects */
+@layer utilities {
+  .neon-cyan {
+    color: var(--cyber-cyan);
+    text-shadow: 0 0 5px var(--cyber-cyan), 0 0 10px var(--cyber-cyan);
+  }
+  
+  .neon-pink {
+    color: var(--cyber-pink);
+    text-shadow: 0 0 5px var(--cyber-pink), 0 0 10px var(--cyber-pink);
+  }
+  
+  .neon-border-cyan {
+    border-color: var(--cyber-cyan);
+    box-shadow: 0 0 5px var(--cyber-cyan), inset 0 0 5px var(--cyber-cyan);
+  }
+  
+  .neon-border-pink {
+    border-color: var(--cyber-pink);
+    box-shadow: 0 0 5px var(--cyber-pink), inset 0 0 5px var(--cyber-pink);
+  }
+  
+  .cyber-gradient {
+    background: linear-gradient(135deg, var(--cyber-dark) 0%, var(--cyber-dark-alt) 100%);
+  }
+  
+  .text-gradient-cyber {
+    background: linear-gradient(90deg, var(--cyber-cyan) 0%, var(--cyber-pink) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Hover animations */
+  .hover-glow:hover {
+    filter: brightness(1.2);
+    transition: all 0.3s ease;
+  }
+  
+  /* Cyber grid background */
+  .cyber-grid {
+    background-image: 
+      linear-gradient(rgba(0, 217, 255, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 217, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}
+
+/* Link styles */
+a {
+  color: var(--cyber-cyan);
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--cyber-pink);
+  text-shadow: 0 0 5px currentColor;
+}
+
+/* Selection colors */
+::selection {
+  background-color: var(--cyber-pink);
+  color: var(--cyber-dark);
+}
+
+::-moz-selection {
+  background-color: var(--cyber-pink);
+  color: var(--cyber-dark);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cyber-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--cyber-cyan);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--cyber-pink);
+}
+
+/* Animation keyframes */
+@keyframes pulse-neon {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes glitch {
+  0%, 100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+.animate-pulse-neon {
+  animation: pulse-neon 2s ease-in-out infinite;
+}
+
+.animate-glitch {
+  animation: glitch 0.3s ease-in-out;
+}
