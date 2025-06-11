@@ -6,7 +6,7 @@ export function Intro() {
         Post-Quantum Bitcoin
       </h1>
       <h4 className="text-center md:text-left text-lg mt-5 md:pl-8 text-cyber-cyan">
-        Exploring the intersection of Bitcoin and Quantum Computing.
+        Exploring the intersection of Bitcoin and Quantum Computing
       </h4>
     </section>
   );

@@ -10,16 +10,21 @@ type Props = {
 };
 
 const CoverImage = ({ title, src, slug, coverImageLink }: Props) => {
+  // Check if image is portrait-style (like A4 reports)
+  const isPortrait = src.includes('pqc-report-cover') || src.includes('Report');
+  
   const image = (
-    <Image
-      src={src}
-      alt={`Cover Image for ${title}`}
-      className={cn("w-full rounded-lg overflow-hidden border-2 border-cyber-cyan/30", {
-        "hover:border-cyber-pink hover:shadow-[0_0_20px_rgba(255,0,110,0.5)] transition-all duration-300": slug,
-      })}
-      width={1300}
-      height={630}
-    />
+    <div className={isPortrait ? "max-w-md mx-auto" : ""}>
+      <Image
+        src={src}
+        alt={`Cover Image for ${title}`}
+        className={cn("w-full rounded-lg overflow-hidden border-2 border-cyber-cyan/30", {
+          "hover:border-cyber-pink hover:shadow-[0_0_20px_rgba(255,0,110,0.5)] transition-all duration-300": slug || coverImageLink,
+        })}
+        width={1300}
+        height={630}
+      />
+    </div>
   );
   return (
     <div className="sm:mx-0">
