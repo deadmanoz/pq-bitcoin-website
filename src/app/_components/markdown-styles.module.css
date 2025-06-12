@@ -54,19 +54,50 @@
 }
 
 .markdown ul {
-  @apply list-disc list-inside;
+  @apply list-disc pl-6 space-y-1;
 }
 
 .markdown ol {
-  @apply list-decimal list-inside;
+  @apply list-decimal pl-6 space-y-1;
 }
 
 .markdown li {
-  @apply mb-2;
+  @apply leading-relaxed;
+}
+
+/* Nested lists */
+.markdown li ul {
+  @apply mt-2 mb-1 space-y-0.5;
+}
+
+.markdown li ol {
+  @apply mt-2 mb-1 space-y-0.5;
+}
+
+/* Nested list items */
+.markdown li ul li {
+  @apply text-base leading-relaxed;
+}
+
+.markdown li ol li {
+  @apply text-base leading-relaxed;
+}
+
+/* Override space-y for nested items */
+.markdown ul ul {
+  @apply space-y-0.5;
+}
+
+.markdown ol ol {
+  @apply space-y-0.5;
 }
 
 .markdown hr {
   @apply border-cyber-cyan/30 my-8;
+}
+
+.markdown sup {
+  @apply text-xs align-super;
 }
 
 .markdown img {
