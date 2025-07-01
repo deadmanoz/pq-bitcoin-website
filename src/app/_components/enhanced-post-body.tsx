@@ -14,7 +14,7 @@ export function EnhancedPostBody({ content }: Props) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImage, setModalImage] = useState({ src: "", alt: "" });
   const searchParams = useSearchParams();
-  const isWideContent = searchParams.get('wide-content') === 'true';
+  const isWideContent = searchParams.get('wide-content') !== 'false';
   
   // Debug: Check if content has annotations
   useEffect(() => {
