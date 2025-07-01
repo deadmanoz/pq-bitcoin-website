@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { getAllPostsIncludingHidden, getPostBySlug } from "@/lib/api";
 import { CMS_NAME } from "@/lib/constants";
 import markdownToHtml from "@/lib/markdownToHtml";
@@ -30,7 +31,9 @@ export default async function Post(props: Params) {
             date={post.date}
             author={post.author}
           />
-          <EnhancedPostBody content={content} />
+          <Suspense fallback={<div>Loading...</div>}>
+            <EnhancedPostBody content={content} />
+          </Suspense>
         </article>
       </Container>
     </main>

@@ -12,8 +12,15 @@
     "next": "^15.3.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "rehype-mathjax": "^7.1.0",
+    "rehype-stringify": "^10.0.1",
     "remark": "^15.0.1",
-    "remark-html": "^16.0.1"
+    "remark-html": "^16.0.1",
+    "remark-math": "^6.0.0",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "styled-jsx": "^5.1.7",
+    "unified": "^11.0.5"
   },
   "devDependencies": {
     "@types/node": "^20.14.8",

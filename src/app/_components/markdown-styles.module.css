@@ -107,3 +107,44 @@
 .markdown img:hover {
   @apply border-cyber-pink shadow-[0_0_20px_rgba(255,0,110,0.3)] transform scale-[1.02];
 }
+
+/* Math styling */
+.markdown .math-inline {
+  display: inline !important;
+}
+
+.markdown .math-display {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+/* Figure styling */
+.markdown figure.figure-container {
+  @apply my-8 text-center;
+}
+
+.markdown figure.figure-container img {
+  @apply mx-auto mb-2;
+}
+
+.markdown figure.figure-container figcaption {
+  @apply text-sm mt-3 px-4 text-center;
+  color: #00d9ff !important; /* cyber-cyan */
+}
+
+.markdown figure.figure-container figcaption strong {
+  @apply font-bold;
+  color: #ff006e !important; /* cyber-pink */
+}
+
+.markdown a.figure-ref {
+  @apply font-medium;
+  color: #ff006e !important; /* cyber-pink */
+}
+
+.markdown a.figure-ref:hover {
+  color: #00d9ff !important; /* cyber-cyan */
+}
+
+
