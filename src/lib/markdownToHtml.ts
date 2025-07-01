@@ -17,7 +17,7 @@ const colorMap: Record<string, string> = {
   'lightblue': '#42D4F4',
   'green': '#10B981',
   'yellow': '#EAB308',
-  'red': '#EF4444',
+  'red': '#E6194B',
   'blue': '#3B82F6',
   'teal': '#14B8A6',
   'lime': '#84CC16',
@@ -47,15 +47,29 @@ function preserveMathDelimiters(htmlString: string): string {
     });
 }
 
-// Process hover annotations with syntax [[text||tooltip]]
+// Don't process annotations before remark - let them pass through
 function processAnnotations(markdownString: string): string {
+  // Do nothing - we'll process after HTML conversion
+  return markdownString;
+}
+
+// Post-process annotations after remark HTML conversion
+function postProcessAnnotations(htmlString: string): string {
+  console.log('[DEBUG] Post-processing annotations...');
   let counter = 0;
-  return markdownString.replace(/\[\[([^\|\]]+)\|\|([^\]]+)\]\]/g, (match, text, tooltip) => {
+  
+  // Look for [[text||tooltip]] pattern in the HTML
+  // Remark will have escaped the brackets
+  const processed = htmlString.replace(/\[\[([^\|\]]+)\|\|([^\]]+)\]\]/g, (match, text, tooltip) => {
     counter++;
-    const id = `annotation-${counter}`;
     const escapedTooltip = tooltip.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+    const id = `annotation-${counter}`;
+    console.log(`[DEBUG] Found annotation ${counter}: text="${text}", tooltip="${tooltip}"`);
     return `<span class="annotation" data-tooltip="${escapedTooltip}" id="${id}" tabindex="0" role="button" aria-describedby="tooltip-${id}">${text}</span>`;
   });
+  
+  console.log(`[DEBUG] Post-processed ${counter} annotations`);
+  return processed;
 }
 
 // Process figures with captions and automatic numbering
@@ -102,6 +116,8 @@ function processFigures(markdown: string, htmlString: string): string {
 }
 
 export default async function markdownToHtml(markdown: string) {
+  console.log('[DEBUG] markdownToHtml called');
+  
   // Pre-process to preserve math delimiters AND annotations
   let processedMarkdown = preserveMathDelimiters(markdown);
   
@@ -110,11 +126,41 @@ export default async function markdownToHtml(markdown: string) {
   
   const result = await remark().use(html).process(processedMarkdown);
   let htmlString = result.toString();
+  
+  // Debug: Look for any remnants of our annotation syntax
+  const searchPatterns = [
+    { pattern: /\[\[/g, name: 'Double opening brackets' },
+    { pattern: /\]\]/g, name: 'Double closing brackets' },
+    { pattern: /\|\|/g, name: 'Double pipes' },
+    { pattern: /long-range quantum/g, name: 'Sample annotation text' }
+  ];
+  
+  searchPatterns.forEach(({ pattern, name }) => {
+    const matches = htmlString.match(pattern);
+    if (matches) {
+      console.log(`[DEBUG] Found ${matches.length} instances of "${name}"`);
+      // Show context around first match
+      const index = htmlString.search(pattern);
+      if (index >= 0) {
+        const context = htmlString.substring(Math.max(0, index - 50), Math.min(htmlString.length, index + 100));
+        console.log(`[DEBUG] Context: ...${context}...`);
+      }
+    }
+  });
+  
+  // Log if we have any annotation spans in the final HTML
+  const annotationCount = (htmlString.match(/class="annotation"/g) || []).length;
+  console.log(`[DEBUG] Final HTML contains ${annotationCount} annotation spans`);
 
   // Post-process transformations
   htmlString = processSuperscript(htmlString);
   htmlString = processColoredText(htmlString);
   htmlString = processFigures(markdown, htmlString);
+  htmlString = postProcessAnnotations(htmlString);
+  
+  // Final check for annotations
+  const finalAnnotationCount = (htmlString.match(/class="annotation"/g) || []).length;
+  console.log(`[DEBUG] FINAL HTML contains ${finalAnnotationCount} annotation spans after all processing`);
 
   return htmlString;
 }

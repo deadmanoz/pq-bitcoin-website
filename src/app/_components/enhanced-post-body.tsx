@@ -15,6 +15,32 @@ export function EnhancedPostBody({ content }: Props) {
   const [modalImage, setModalImage] = useState({ src: "", alt: "" });
   const searchParams = useSearchParams();
   const isWideContent = searchParams.get('wide-content') === 'true';
+  
+  // Debug: Check if content has annotations
+  useEffect(() => {
+    console.log('[DEBUG] EnhancedPostBody mounted');
+    const annotationCount = (content.match(/class="annotation"/g) || []).length;
+    console.log(`[DEBUG] Content prop contains ${annotationCount} annotation spans`);
+    
+    // Log a sample of the content to see the HTML
+    if (annotationCount > 0) {
+      const index = content.indexOf('class="annotation"');
+      const sample = content.substring(Math.max(0, index - 100), Math.min(content.length, index + 200));
+      console.log(`[DEBUG] Content sample: ...${sample}...`);
+    }
+    
+    // Also check rendered DOM
+    setTimeout(() => {
+      const domAnnotations = document.querySelectorAll('.annotation');
+      console.log(`[DEBUG] DOM contains ${domAnnotations.length} annotation elements`);
+      domAnnotations.forEach((ann, i) => {
+        console.log(`[DEBUG] Annotation ${i}: text="${ann.textContent}", tooltip="${ann.getAttribute('data-tooltip')}"`);
+        // Check computed styles
+        const styles = window.getComputedStyle(ann);
+        console.log(`[DEBUG] Annotation ${i} visibility: ${styles.visibility}, display: ${styles.display}`);
+      });
+    }, 1000);
+  }, [content]);
 
   useEffect(() => {
     // Trigger MathJax typesetting when content changes
@@ -46,100 +72,19 @@ export function EnhancedPostBody({ content }: Props) {
       }
     };
 
-    const handleAnnotationClick = (event: Event) => {
-      const target = event.target as HTMLElement;
-      if (target.classList.contains('annotation')) {
-        event.preventDefault();
-        // Toggle active class for mobile tooltip visibility
-        target.classList.toggle('active');
-        
-        // Remove active class from other annotations
-        const allAnnotations = document.querySelectorAll('.annotation.active');
-        allAnnotations.forEach(annotation => {
-          if (annotation !== target) {
-            annotation.classList.remove('active');
-          }
-        });
-      }
-    };
-
-    // Process annotations on the client side
-    const processClientSideAnnotations = () => {
-      const markdownContainer = document.querySelector(`.${markdownStyles.markdown}`);
-      if (!markdownContainer) {
-        console.log('No markdown container found');
-        return;
-      }
-
-      // Define annotations as an array of [phrase, tooltip] pairs
-      const annotations = [
-        ['quantum computing attacks', 'Cryptographically Relevant Quantum Computers (CRQCs) capable of breaking Bitcoin\'s elliptic curve cryptography using Shor\'s algorithm'],
-        ['analyzed is purely on-chain', 'On-Chain Data: Information that is recorded directly on the Bitcoin blockchain and publicly accessible']
-      ];
-
-      // Find all text nodes
-      const walker = document.createTreeWalker(
-        markdownContainer,
-        NodeFilter.SHOW_TEXT,
-        null
-      );
-
-      const textNodes: Text[] = [];
-      let node;
-      while (node = walker.nextNode()) {
-        textNodes.push(node as Text);
-      }
-
-      // Process each annotation
-      annotations.forEach(([phrase, tooltip]) => {
-        textNodes.forEach((textNode) => {
-          const text = textNode.textContent || '';
-          if (text.includes(phrase)) {
-            // Replace the phrase with an annotation span
-            const processedHTML = text.replace(
-              new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'),
-              `<span class="annotation" data-tooltip="${tooltip.replace(/"/g, '&quot;').replace(/'/g, '&#39;')}" tabindex="0" role="button">${phrase}</span>`
-            );
-
-            if (processedHTML !== text) {
-              // Create a temporary container to parse the HTML
-              const tempDiv = document.createElement('div');
-              tempDiv.innerHTML = processedHTML;
-              
-              // Replace the text node with the processed content
-              const parent = textNode.parentNode;
-              if (parent) {
-                while (tempDiv.firstChild) {
-                  parent.insertBefore(tempDiv.firstChild, textNode);
-                }
-                parent.removeChild(textNode);
-              }
-            }
-          }
-        });
-      });
-    };
+    // Remove the click handler - we'll only use hover for desktop
+    // For mobile, we'll rely on touch events
 
     // Use a timeout to ensure DOM is ready
     const timeoutId = setTimeout(() => {
       const markdownContainer = document.querySelector(`.${markdownStyles.markdown}`);
       if (markdownContainer) {
-        // Process annotations first
-        processClientSideAnnotations();
-        
         const images = markdownContainer.querySelectorAll("img");
         images.forEach(img => {
           img.style.cursor = "pointer";
           // Remove existing listeners to avoid duplicates
           img.removeEventListener("click", handleImageClick);
           img.addEventListener("click", handleImageClick);
-        });
-
-        const annotations = markdownContainer.querySelectorAll(".annotation");
-        annotations.forEach(annotation => {
-          // Remove existing listeners to avoid duplicates
-          annotation.removeEventListener("click", handleAnnotationClick);
-          annotation.addEventListener("click", handleAnnotationClick);
         });
       }
     }, 100);
@@ -214,8 +159,7 @@ export function EnhancedPostBody({ content }: Props) {
           text-decoration: none !important;
         }
 
-        .annotation:hover,
-        .annotation.active {
+        .annotation:hover {
           color: #ff006e !important;
           background: linear-gradient(90deg, rgba(255, 0, 110, 0.2) 0%, rgba(0, 217, 255, 0.2) 100%) !important;
           border-bottom-color: #ff006e !important;
@@ -266,16 +210,14 @@ export function EnhancedPostBody({ content }: Props) {
         }
 
         .annotation:hover::after,
-        .annotation:focus::after,
-        .annotation.active::after {
+        .annotation:focus::after {
           opacity: 1 !important;
           visibility: visible !important;
           transform: translateX(-50%) translateY(0) !important;
         }
 
         .annotation:hover::before,
-        .annotation:focus::before,
-        .annotation.active::before {
+        .annotation:focus::before {
           opacity: 1 !important;
           visibility: visible !important;
         }

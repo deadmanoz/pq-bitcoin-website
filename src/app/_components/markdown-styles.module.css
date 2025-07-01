@@ -34,7 +34,7 @@
 }
 
 .markdown em {
-  @apply text-cyber-yellow;
+  @apply text-cyber-yellow font-bold not-italic;
 }
 
 .markdown code {
