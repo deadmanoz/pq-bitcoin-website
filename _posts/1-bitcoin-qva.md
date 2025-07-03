@@ -48,7 +48,7 @@ We explore the historical patterns of script use and reuse behavior, showing tha
 2) **Top 1000 Address Analysis**: We examine data of the top 1000 addresses by value, finding that around 45% of these addresses, representing ~2.73M BTC, are quantum-vulnerable.
 There are numerous holdings of 10,000s - 100,000s of BTC that are vulnerable due to reuse, with many such holdings attributed to exchanges and institutions.
 
-[[Almost all spendable funds||Some spendable funds are based on hash pre-image puzzles, where just the pre-image that hashes to a specific value is needed to spend, and no signature is required]] in Bitcoin are quantum-vulnerable due to the fact that they use ECC-based digital signatures, which are vulnerable to being broken by [[Cryptographically Relevant Quantum Computers (CRQCs)||Cryptographically Relevant Quantum Computers
+[[Almost all spendable funds||Some spendable funds are based on hash pre-image puzzles, where just the pre-image that hashes to a specific value is needed to spend, and no signature is required]] in Bitcoin are quantum-vulnerable due to the fact that they use ECC-based digital signatures, which could be broken by [[Cryptographically Relevant Quantum Computers (CRQCs)||Cryptographically Relevant Quantum Computers
 (CRQC) are quantum computers that are powerful enough to break widely used cryptographic primitives such as ECC upon which Bitcoin's digital signatures are currently based]].
 However, some funds are much more vulnerable than others.
 Typically, the phrase 'quantum-vulnerable' (or QV) is used in relation to those funds that are vulnerable to **long-range attacks**.
@@ -64,7 +64,7 @@ See Section 4, **Threat Model: Quantum Risk to Bitcoin**, of [the report](bitcoi
 For the purposes of this work, address reuse is defined as an address that has one or more UTXOs associated with it, but also has one or more spends from it in its history.
 Spends reveal, and permanently record, public keys on the blockchain.
 
-This analysis was performed using data sources including the Bitcoin blockchain and the Bitcoin Cash blockchain on Google's BigQuery (`bigquery-public-data.crypto_bitcoin` and `bigquery-public-data.crypto_bitcoin_cash`, respectively).
+This analysis was performed using the Bitcoin blockchain and the Bitcoin Cash blockchain as available on Google's BigQuery (`bigquery-public-data.crypto_bitcoin` and `bigquery-public-data.crypto_bitcoin_cash`, respectively).
 The UTXO set was re-constructed for block heights from 400,000 to 900,000, in 50,000 block increments.
 The Bitcoin Cash fork exposure analysis was performed for all analyzed block heights from 500,000 onwards (the fork occurred at block 478,558).
 The top address data from BitInfoCharts' Rich List (including address labels) was obtained at block height ~900,500 (June 10, 2025).
@@ -74,11 +74,11 @@ At block height 900,000 (June 6, 2025), there were around 21,000 non-standard sc
 
 # Quantum Vulnerability Breakdown
 
-The crux of Bitcoin's vulnerability to CRQCs is that CRQCs have the potential to derive a private key from a public key; an attacker with a CRQC could derive a private key and then create and broadcast a transaction that spends the victim’s funds to an address they control.
+The crux of Bitcoin's vulnerability to CRQCs is that CRQCs have the potential to derive a private key from a public key; an attacker with a CRQC could derive a private key and then create and broadcast a transaction that spends the victim's funds to an address they control.
 
-For an attacker to do this, they need access to a victim's public key in the first place. Fortunately for potential attackers, the Bitcoin blockchain serves as a permanent, public repository of millions of exposed public keys.
+For an attacker to do this, they need access to the victim's public key in the first place. Fortunately for potential attackers, the Bitcoin blockchain serves as a permanent, public repository of millions of exposed public keys.
 Every time a Bitcoin user spends from an address and then receives funds back to that same address ("address reuse"), they provide future quantum adversaries with unrestricted access to their public key.
-Add to this inherently vulnerable script types that expose public keys by default (P2PK, P2MS and P2TR) and cross-chain exposure from Bitcoin forks, we find an attack surface encompassing 32.73% of all Bitcoin in existence!
+Add to this inherently vulnerable script types that expose public keys by default (P2PK, P2MS, and P2TR) and cross-chain exposure from Bitcoin forks, we find an attack surface encompassing 32.73% of all Bitcoin in existence!
 
 ![Figure: Breakdown of quantum-vulnerable Bitcoin at block height 900,000](/assets/blog/qva1/quantum_vulnerability_breakdown.png){#fig:quantum-vulnerability-breakdown}
 
@@ -92,15 +92,15 @@ For the inherently vulnerable script types in the top-right of {@fig:quantum-vul
 
 Although small in percentage terms, a still significant amount of BTC (~0.15M), is quantum-vulnerable due to Bitcoin Cash fork exposure.
 These funds are vulnerable due to the fact that they have been spent on the Bitcoin Cash fork, thus revealing and recording public keys on the Bitcoin Cash blockchain, but remain unspent and in the UTXO set of Bitcoin.
-Note that at the time of the fork, only 4 script types (ignoring non-standard scripts) were available on Bitcoin: P2PK, P2MS, P2SH and P2PKH.
+Note that at the time of the fork, only 4 script types (ignoring non-standard scripts) were available on Bitcoin: P2PK, P2MS, P2SH, and P2PKH.
 And because P2PK and P2MS already have public keys exposed by default, only P2SH and P2PKH spends on Bitcoin Cash are accounted for in this exposure analysis; the breakdown is shown in the bottom-right of {@fig:quantum-vulnerability-breakdown}.
 
 # Quantum Vulnerability Over Time
 
-The following visualisations show the breakdown and trends in quantum-vulnerable Bitcoin over time, since block height 400,000 almost 10 years ago.
+The following vizualisations show the breakdown and trends in quantum-vulnerable Bitcoin over time, since block height 400,000, almost 10 years ago.
 The impact of Bitcoin Cash fork exposure is dramatically obvious from the block height 500,000 sample, revealing a significant increase in quantum vulnerability from that point.
 
-![Figure: Total quantum-vulnerable Bitcoin over time from block height 400,000 to 900,000. The red line shows Bitcoin-only vulnerabilities, while the pink bars show total vulnerability including Bitcoin Cash fork exposure. The dramatic spike at block 500,000 reveals the immediate impact of the Bitcoin Cash fork, which exposed an additional 3.11M BTC to quantum risk.](/assets/blog/qva1/quantum_vulnerable_btc.png){#fig:quantum-vulnerable-btc}
+![Figure: Total quantum-vulnerable Bitcoin over time from block height 400,000 to 900,000. The red line shows Bitcoin-only vulnerabilities, while the pink bars show total vulnerability, including Bitcoin Cash fork exposure. The dramatic spike at block 500,000 reveals the immediate impact of the Bitcoin Cash fork, which exposed an additional 3.11M BTC to quantum risk.](/assets/blog/qva1/quantum_vulnerable_btc.png){#fig:quantum-vulnerable-btc}
 
 {@fig:quantum-vulnerable-btc} reveals the impact of the Bitcoin Cash fork on total funds that are immediately quantum-vulnerable.
 Between block heights 450,000 (January 2017) and 500,000 (December 2017), quantum-vulnerable funds jumped dramatically from 5.57M BTC to 8.52M BTC.
@@ -109,7 +109,7 @@ At block height 500,000, some ~21,000 blocks after the fork, 3.1M BTC had been s
 Following the Bitcoin Cash fork spike, the total number of quantum-vulnerable funds has generally been falling from its peak of 8.52M BTC, as users gradually moved their fork-exposed funds to new addresses.
 However, the {{red:red line}} in {@fig:quantum-vulnerable-btc} reveals a concerning trend, especially after block height 700,000 (September 2021): quantum-vulnerable funds from Bitcoin-native sources have been steadily increasing.
 
-With the Taproot upgrade activating at block height 709,632 (Nov 2021), it would be reasonable to assume that the increase in quantum-vulnerable funds would be due to the adoption of the P2TR script type, but this is actually not the case!
+With the Taproot upgrade activating at block height 709,632 (Nov 2021), it would be reasonable to assume that the increase in quantum-vulnerable funds would be due to the adoption of the P2TR script type, but this is actually not the case - it's primarily due to an increase in address reuse!
 
 ![Figure: Percentage contribution of quantum vulnerability sources over time.](/assets/blog/qva1/quantum_vulnerability_percentage_breakdown_with_bch.png){#fig:quantum-vulnerability-percentage-breakdown}
 
@@ -124,12 +124,13 @@ It also shows that the percentage contribution of vulnerability due to reuse has
 As this analysis relies solely on on-chain data, we cannot definitively explain the large increase in reuse between block heights 500,000 (December 2017) and 550,000 (November 2018), and then again from block height 750,000 (August 2022) until now (900,000).
 However, we can look to the broader history of Bitcoin to understand why this might be the case.
 
-The first period, 500,000-550,000, appears to directly correlate with Bitcoin's first mainstream adoption wave, which saw a large influx of retail investors that perhaps lacked either the technical knowledge or the wallet tools to implement best practices, and also associated growth in cryptocurrency exchanges and custodial services, many of which implemented address reuse for operational simplicity and customer fund management.
+The first period, 500,000-550,000, appears to directly correlate with Bitcoin's first mainstream adoption wave.
+This era saw a large influx of retail investors that perhaps lacked either the technical knowledge or the wallet tools to implement best practices, and also associated growth in cryptocurrency exchanges and custodial services, many of which implemented address reuse for operational simplicity and customer fund management.
 
 The most recent period, since 750,000, with a particular escalation sometime after 800,000 (July 2023), correlates with the increasing institutionalization and financialization of Bitcoin in this period.
-Notably, the January 2024 (corresponding to a block height of ~825,000) approval of 11 spot Bitcoin ETFs perhaps transformed address reuse patterns at scale from this date.
+Notably, the January 2024 (corresponding to a block height of ~825,000) approval of 11 spot Bitcoin ETFs, perhaps transformed address reuse patterns at scale from this date.
 
-With Bitcoin ETFs being instruments that involve the direct buying and selling of the underlying Bitcoin, and with institutional systems favouring operational efficiency and regulatory compliance over privacy considerations, it seems reasonable to hypothesize that increased address reuse is related to such players transacting with Bitcoin in this period.
+With Bitcoin ETFs being instruments that involve the direct buying and selling of the underlying Bitcoin, and with institutional systems favoring operational efficiency and regulatory compliance over privacy considerations, it seems reasonable to hypothesize that increased address reuse is related to such players transacting with Bitcoin in this period.
 
 # Top 1000 Addresses Quantum Vulnerability Assessment
 
@@ -147,18 +148,18 @@ Reconciling the top 1000 address data with the earlier quantum-vulnerability ana
 This represents a disproportionate ~41.9% of the total quantum-vulnerable funds, considering the top 1000 addresses only account for ~30.9% of the total Bitcoin supply.
 In addition, the 29.4% reuse rate among top holders exceeds the ~15-20% global address reuse rate (see Figure XX in the Appendix), indicating that large holders currently employ operational practices that increase quantum vulnerability.
 
-# Labelled Entity Holdings in Top 1000 Addresses
+# Labeled Entity Holdings in Top 1000 Addresses
 
-It should be emphasised that the following is based on the labels assigned to the addresses by BitInfoCharts Rich List.
-It is extremely likely that the labels are not 100% accurate and that many of the unlabelled addresses are actually held by exchanges or institutional custodians.
+It should be emphasized that the following is based on the labels assigned to the addresses by BitInfoCharts Rich List.
+It is extremely likely that the labels are not 100% accurate and that many of the unlabeled addresses are actually held by exchanges or institutional custodians.
 With that caveat in mind, the following analysis is still useful in providing a snapshot of the quantum vulnerability profile of the top 1000 addresses by balance.
 
-![Figure: The holdings of the top-10 exchange entities in the top 1000 addresses based on known labels.  Note: this likely under-represents holdings of each of these exchanges as we’re only considering the top-1000 addresses and also many unlabelled addresses in the top-1000 probably belong to exchanges.](/assets/blog/qva1/top_10_exchanges_by_balance.png){#fig:top-10-exchanges-by-balance}
+![Figure: The holdings of the top-10 exchange entities in the top 1000 addresses based on known labels.  Note: this likely under-represents holdings of each of these exchanges as we're only considering the top-1000 addresses and also many unlabeled addresses in the top-1000 probably belong to exchanges.](/assets/blog/qva1/top_10_exchanges_by_balance.png){#fig:top-10-exchanges-by-balance}
 
-By grouping the addresses by their entity label and focusing on labelled exchanges we can see an even clearer picture still in {@fig:top-10-exchanges-by-balance}:
+By grouping the addresses by their entity label and focusing on labeled exchanges, we can see an even clearer picture still in {@fig:top-10-exchanges-by-balance}:
 - ~84% of funds identified as belonging to Binance are custodied in reused addresses.
 - ~77% of funds identified as belonging to OKX are custodied in reused addresses.
-- [[All funds identified as belonging to all other exchanges are custodied in reused addresses.||Of course reuse is likely how many of these addresses have been identified as belonging to particular exchanges or custodians, and we can't say anything about the unlabelled addresses]]
+- [[All funds identified as belonging to all other exchanges are 100% custodied in reused addresses.||Of course reuse is likely how many of these addresses have been identified as belonging to particular exchanges or custodians, and we can't say anything about the unlabeled addresses]]
 
 The summary statistics are revealing: ~90.4% of funds identified as belonging to exchanges are custodied in reused addresses.
 This represents a potential target of ~1.3M BTC in just 45 reused addresses belonging to exchange entities for quantum attackers.
@@ -219,7 +220,7 @@ Despite P2TR having rapidly grown into a significant portion of the UTXO set in 
 ![Figure: The top-10 addresses by balance (with original labels as per the BitInfoCharts Rich List).](/assets/blog/qva1/top_10_addresses.png){#fig:top-10-addresses}
 
 {@fig:top-10-addresses} shows the address balance distribution for the top 10 addresses by holdings.
-9 of the 10 addresses belong to known entities (are labelled), and 6 of the 10 addresses exhibit address reuse.
+9 of the 10 addresses belong to known entities (are labeled), and 6 of the 10 addresses exhibit address reuse.
 The top 10 addresses alone control over 1.1M BTC, with 800K belonging to reused addresses.
 
 ![Figure: Breakdown of script type of the top 1000 addresses by both address count and BTC value. Each script type is separated into reused (patterned) and non-reused (solid fill).](/assets/blog/qva1/spent_unspent_breakdown_patterned.png){#fig:spent-unspent-breakdown-patterned}
@@ -242,9 +243,9 @@ From this we can also make the following observations:
 - OKX also appears to favour P2SH, with 2 of the top 10 P2SH addresses being held by OKX. Both have been reused.
 - The top 2 P2WSH addresses belong to Bitfinex/Tether, both are reused.
 - Government seized and custodied funds, including the Bitfinex hack recovery funds, Silk Road seized funds, and UK Government seized funds, are all non-reused P2WPKH addresses.
-- [[The top P2PKH address, labelled Mt Gox Hack, contains non-reused funds that Mark Karpelès, former Mt. Gox CEO claims were "transferred without proper authorization from MtGox's original bitcoind wallet" on March 1, 2011.||Reference: https://blog.wizsec.jp/2020/06/mtgox-march-2011-theft.html]]
+- [[The top P2PKH address, labeled Mt Gox Hack, contains non-reused funds that Mark Karpelès, former Mt. Gox CEO claims were "transferred without proper authorization from MtGox's original bitcoind wallet" on March 1, 2011.||Reference: https://blog.wizsec.jp/2020/06/mtgox-march-2011-theft.html]]
 Aside from dusting and address poisoning, they've been dormant ever since.
-- Of the exchange-related funds that are labelled, only 2 Binance cold wallets remain unused.
+- Of the exchange-related funds that are labeled, only 2 Binance cold wallets remain unused.
 
 ## Additional UTXO Set Figures
 
