@@ -154,7 +154,7 @@ It should be emphasized that the following is based on the labels assigned to th
 It is extremely likely that the labels are not 100% accurate and that many of the unlabeled addresses are actually held by exchanges or institutional custodians.
 With that caveat in mind, the following analysis is still useful in providing a snapshot of the quantum vulnerability profile of the top 1000 addresses by balance.
 
-![Figure: The holdings of the top-10 exchange entities in the top 1000 addresses based on known labels.  Note: this likely under-represents holdings of each of these exchanges as we're only considering the top-1000 addresses and also many unlabeled addresses in the top-1000 probably belong to exchanges.](/assets/blog/qva1/top_10_exchanges_by_balance.png){#fig:top-10-exchanges-by-balance}
+![Figure: The holdings of the top-10 exchange entities in the top 1000 addresses based on known labels. The total holdings associated with each entity is shown as the white value atop of each bar, with the orange value indicating the funds that reside in reused addresses. Note: this likely under-represents holdings of each of these exchanges as we're only considering the top-1000 addresses and also many unlabeled addresses in the top-1000 probably belong to exchanges.](/assets/blog/qva1/top_10_exchanges_by_balance.png){#fig:top-10-exchanges-by-balance}
 
 By grouping the addresses by their entity label and focusing on labeled exchanges, we can see an even clearer picture still in {@fig:top-10-exchanges-by-balance}:
 - ~84% of funds identified as belonging to Binance are custodied in reused addresses.
