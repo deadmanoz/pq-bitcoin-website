@@ -35,7 +35,6 @@ Our analysis reveals that almost *70% of immediately quantum-vulnerable Bitcoin 
 
 - 29.4% (294) of the top 1000 addresses have exposed public keys via reuse, controlling *~45% (~2.73M BTC)* of funds held by these addresses
 - Exchange-related addresses in the top 1000 show alarming reuse patterns: *~90.4% of identified exchange funds are in reused addresses*
-- Binance alone has *~84% of its identified funds in reused addresses*, while *OKX has ~77%*
 
 We emphasize that address reuse is an entirely avoidable risk that, unlike inherently vulnerable script types or fork exposure, can be significantly reduced today through behavioral changes and established best practices.
 
