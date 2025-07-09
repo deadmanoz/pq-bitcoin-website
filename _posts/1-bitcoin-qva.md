@@ -169,13 +169,7 @@ This represents a potential target of ~1.3M BTC in just 45 reused addresses belo
 
 - **Address reuse constitutes the dominant vulnerability source, accounting for 69.0% (4.49M BTC) of all quantum-vulnerable funds as of block height 900,000, significantly exceeding inherently vulnerable script types at 28.8% (1.87M BTC)**
 
-- **Legacy P2PK outputs represent 92% of inherently vulnerable scripts, predominantly consisting of Satoshi-era mining rewards that perhaps cannot be migrated by their owners**
-
-- **While the percentage of supply vulnerable to quantum attacks declined from the post-fork peak of 50.89%, it has stabilized around 32-33% and begun increasing again since 2021**
-
-- **The Bitcoin Cash fork created an unprecedented spike in quantum vulnerability, jumping from 5.41M to 8.52M BTC (32.27% to 50.89% of supply) at between block heights 450,000 and 500,000, with effects still visible today**
-
-- **The top 1000 addresses control 30.88% of Bitcoin's supply but account for a disproportionate 41.9% of all quantum-vulnerable funds**
+- **While the percentage of supply vulnerable to quantum attacks declined from the Bitcoin Cash fork peak of 50.89%, it has stabilized around 32-33% and begun increasing again since 2021**
 
 - **Exchange holdings show particularly alarming patterns: 90.4% of identified exchange funds are held in reused addresses, with Binance at 84% and OKX at 77%**
 
