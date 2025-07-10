@@ -242,6 +242,6 @@ Aside from dusting and address poisoning, they've been dormant ever since.
 
 ## Additional UTXO Set Figures
 
-![Figure: Breakdown of the UTXO set by number of UTXOs by script type over time.](/assets/blog/qva1/utxos_by_script_type.png){#fig:utxos-by-script-type}
+![Figure: Breakdown of the UTXO set by number of UTXOs by script type over time.](/assets/blog/qva1/utxos_by_script_type_stacked.png){#fig:utxos-by-script-type}
 
-![Figure: Breakdown of the UTXO set by value encumbered by script type over time.](/assets/blog/qva1/btc_by_script_type.png){#fig:btc-by-script-type}
+![Figure: Breakdown of the UTXO set by value encumbered by script type over time.](/assets/blog/qva1/btc_by_script_type_stacked.png){#fig:btc-by-script-type}
