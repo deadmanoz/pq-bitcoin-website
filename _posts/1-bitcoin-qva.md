@@ -26,7 +26,7 @@ Our analysis reveals that almost *70% of immediately quantum-vulnerable Bitcoin 
   - *Represents an entirely preventable risk through proper address hygiene*
 - **Inherently Vulnerable Scripts: 1.87M BTC (28.8%)**
   - P2PK: 1.72 M BTC - Primarily Satoshi-era mining rewards (pre-2011)
-  - 153 K BTC due to P2TR (Taproot addresses with exposed tweaked keys), only 91 BTC due to P2MS (legacy raw multisig outputs)
+  - 153 K BTC due to P2TR (Taproot addresses with exposed tweaked keys), only 69 BTC due to P2MS (legacy raw multisig outputs)
 - **Bitcoin Cash Fork Exposure: 0.15M BTC (2.3%)**
   - UTXOs spent on BCH but remaining unspent on Bitcoin
   - Public key exposure despite no address reuse on Bitcoin itself
