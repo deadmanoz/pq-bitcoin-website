@@ -37,14 +37,25 @@ function processColoredText(htmlString: string): string {
 
 // Preserve math delimiters for client-side MathJax processing
 function preserveMathDelimiters(htmlString: string): string {
-  // Escape HTML entities within math delimiters to prevent remark from processing them
-  return htmlString
-    .replace(/\$\$([^$]+)\$\$/g, (match, math) => {
-      return `<div class="math-display">$$${math}$$</div>`;
-    })
-    .replace(/\$([^$]+)\$/g, (match, math) => {
-      return `<span class="math-inline">$${math}$</span>`;
-    });
+  console.log('[DEBUG] Preserving math delimiters...');
+  console.log('[DEBUG] Input string sample:', htmlString.substring(0, 200));
+
+  // Process display math \[...\]
+  let processed = htmlString.replace(/\\\[([^\]]+?)\\\]/g, (match, math) => {
+    console.log(`[DEBUG] Found display math: ${math}`);
+    // Double escape the backslashes to survive markdown processing
+    return `<div class="math-display">\\\\[${math}\\\\]</div>`;
+  });
+
+  // Process inline math \(...\)
+  processed = processed.replace(/\\\(([^)]+?)\\\)/g, (match, math) => {
+    console.log(`[DEBUG] Found inline math: ${math}`);
+    console.log(`[DEBUG] Original match: ${match}`);
+    // Double escape the backslashes to survive markdown processing
+    return `<span class="math-inline">\\\\(${math}\\\\)</span>`;
+  });
+
+  return processed;
 }
 
 // Don't process annotations before remark - let them pass through
@@ -118,6 +129,11 @@ function processFigures(markdown: string, htmlString: string): string {
 export default async function markdownToHtml(markdown: string) {
   console.log('[DEBUG] markdownToHtml called');
   
+  // Check for math content
+  const mathInlineCount = (markdown.match(/\\\([^)]+\\\)/g) || []).length;
+  const mathDisplayCount = (markdown.match(/\\\[[^\]]+\\\]/g) || []).length;
+  console.log(`[DEBUG] Found ${mathInlineCount} inline math and ${mathDisplayCount} display math expressions`);
+  
   // Pre-process to preserve math delimiters AND annotations
   let processedMarkdown = preserveMathDelimiters(markdown);
   
@@ -158,9 +174,12 @@ export default async function markdownToHtml(markdown: string) {
   htmlString = processFigures(markdown, htmlString);
   htmlString = postProcessAnnotations(htmlString);
   
-  // Final check for annotations
+  // Final check for annotations and math
   const finalAnnotationCount = (htmlString.match(/class="annotation"/g) || []).length;
+  const finalMathInlineCount = (htmlString.match(/class="math-inline"/g) || []).length;
+  const finalMathDisplayCount = (htmlString.match(/class="math-display"/g) || []).length;
   console.log(`[DEBUG] FINAL HTML contains ${finalAnnotationCount} annotation spans after all processing`);
+  console.log(`[DEBUG] FINAL HTML contains ${finalMathInlineCount} inline math and ${finalMathDisplayCount} display math`);
 
   return htmlString;
 }

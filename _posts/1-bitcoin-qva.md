@@ -145,7 +145,7 @@ Of the top 1000 addresses, ~29% (294) of the addresses, representing ~45% (~2.73
 
 Reconciling the top 1000 address data with the earlier quantum-vulnerability analysis, of the ~6.51M BTC that is quantum-vulnerable, ~2.73M BTC is held by the top 1000 addresses.
 This represents a disproportionate ~41.9% of the total quantum-vulnerable funds, considering the top 1000 addresses only account for ~30.9% of the total Bitcoin supply.
-In addition, the 29.4% reuse rate among top holders exceeds the ~15-20% global address reuse rate (see Figure XX in the Appendix), indicating that large holders currently employ operational practices that increase quantum vulnerability.
+In addition, the 29.4% reuse rate among top holders exceeds the ~15-20% global address reuse rate (see {@fig:reuse-percentages} in the Appendix), indicating that large holders currently employ operational practices that increase quantum vulnerability.
 
 # Labeled Entity Holdings in Top 1000 Addresses
 
@@ -199,7 +199,7 @@ The {{magenta:Address Reuse %}} in {@fig:reuse-percentages} is the percentage of
 The {{orange:UTXOs in Reused Addresses % (Hashed Script Types)}} is the percentage of UTXOs that belong to a reused address of hashed script types only.
 Note that unique addresses represent only addresses that hold value (have associated UTXOs) at that specific block height, not all addresses that have ever been used.
 
-{@fig:reuse-percentages} reveals that while < 20% of addresses are reused, almost $\frac{2}{3}$ of all UTXOs belong to a reused address:
+{@fig:reuse-percentages} reveals that while < 20% of addresses are reused, almost \(\frac{2}{3}\) of all UTXOs belong to a reused address:
 - A majority of addresses, 80-85%, are single-use, following good privacy practices.
 - A minority of addresses, 15-20%, are reused and account for a majority of UTXOs.
 
