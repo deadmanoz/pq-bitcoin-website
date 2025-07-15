@@ -4,8 +4,7 @@ title: >-
 excerpt: >-
   Analysis of the Bitcoin blockchain reveals that as of block 900,000, some 6.51 million BTC (32.7% of total supply) is vulnerable to quantum computing attacks, representing over $700 billion at current valuations. Almost 70% of this at-risk Bitcoin is due to the practice of address reuse.
 coverImage: '/assets/blog/qva1/quantum_vulnerability_breakdown.png'
-date: '2025-07-01T12:00:00.000Z'
-hidden: true
+date: '2025-07-15T12:00:00.000Z'
 author:
   name: Anthony Milton & Clara Shikhelman
 ogImage:
