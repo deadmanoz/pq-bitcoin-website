@@ -5,6 +5,61 @@ export function Footer() {
     <footer className="bg-cyber-dark-alt border-t-2 border-cyber-cyan/30">
       <Container>
         <div className="py-16 text-center">
+          {/* Authors' Social Links */}
+          <div className="mb-4">
+            <h3 className="text-md font-semibold text-cyber-cyan mb-3">Follow the Authors</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-xl mx-auto">
+              {/* Anthony Milton */}
+              <div>
+                <h4 className="text-cyber-pink font-medium mb-2 text-sm">Anthony Milton</h4>
+                <div className="flex flex-col space-y-1">
+                  <a
+                    href="https://x.com/ozdeadman"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center space-x-2 text-cyber-cyan hover:text-cyber-pink transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,0,110,0.5)] p-1.5 rounded border border-cyber-cyan/30 hover:border-cyber-pink/50"
+                    aria-label="Anthony Milton on X"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    <span className="text-xs font-medium">@ozdeadman</span>
+                  </a>
+                  <a
+                    href="https://primal.net/deadmanoz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center space-x-2 text-cyber-cyan hover:text-cyber-pink transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,0,110,0.5)] p-1.5 rounded border border-cyber-cyan/30 hover:border-cyber-pink/50"
+                    aria-label="Anthony Milton on Nostr"
+                  >
+                    <span className="text-xs font-medium">Nostr:</span>
+                    <span className="text-xs font-medium">deadmanoz</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Clara Shikhelman */}
+              <div>
+                <h4 className="text-cyber-pink font-medium mb-2 text-sm">Clara Shikhelman</h4>
+                <div className="flex flex-col space-y-1">
+                  <a
+                    href="https://x.com/ClaraShik"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-center space-x-2 text-cyber-cyan hover:text-cyber-pink transition-colors duration-300 hover:shadow-[0_0_10px_rgba(255,0,110,0.5)] p-1.5 rounded border border-cyber-cyan/30 hover:border-cyber-pink/50"
+                    aria-label="Clara Shikhelman on X"
+                  >
+                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                    <span className="text-xs font-medium">@ClaraShik</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* GitHub Link */}
           <div className="flex items-center justify-center space-x-6 mb-4">
             <a
               href="https://github.com/deadmanoz/pq-bitcoin-website"

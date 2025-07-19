@@ -10,8 +10,8 @@ type Props = {
 };
 
 const CoverImage = ({ title, src, slug, coverImageLink }: Props) => {
-  // Check if image is portrait-style (like A4 reports)
-  const isPortrait = src.includes('pqc-report-cover') || src.includes('Report');
+  // Check if image is portrait-style (like A4 reports) or should be constrained
+  const isPortrait = src.includes('pqc-report-cover') || src.includes('Report') || src.includes('pbquantum-summit-poster');
   
   const image = (
     <div className={isPortrait ? "max-w-md mx-auto" : ""}>
