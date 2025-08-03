@@ -1,5 +1,6 @@
 import Footer from "@/app/_components/footer";
 import { HOME_OG_IMAGE_URL } from "@/lib/constants";
+import { getAbsoluteUrl } from "@/lib/url";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import cn from "classnames";
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   title: "Post-Quantum Bitcoin",
   description: "Exploring the intersection of Bitcoin and Quantum Computing",
   openGraph: {
-    images: [HOME_OG_IMAGE_URL],
+    images: [getAbsoluteUrl(HOME_OG_IMAGE_URL)],
   },
 };
 

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getAllPostsIncludingHidden, getPostBySlug } from "@/lib/api";
 import { CMS_NAME } from "@/lib/constants";
+import { getAbsoluteUrl } from "@/lib/url";
 import markdownToHtml from "@/lib/markdownToHtml";
 import Container from "@/app/_components/container";
 import Header from "@/app/_components/header";
@@ -60,7 +61,7 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
     title,
     openGraph: {
       title,
-      images: [post.ogImage.url],
+      images: [getAbsoluteUrl(post.ogImage.url)],
     },
   };
 }
