@@ -16,4 +16,4 @@ Anthony Milton & Clara Shikhelman
 
 ## License
 
-© 2025 Anthony Milton & Clara Shikhelman. All rights reserved.
+© 2026 Anthony Milton & Clara Shikhelman. All rights reserved.

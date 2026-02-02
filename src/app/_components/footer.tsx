@@ -84,7 +84,7 @@ export function Footer() {
             </a>
           </div>
           <p className="text-sm text-cyber-cyan/70">
-            © 2025 Anthony Milton & Clara Shikhelman. All rights reserved.
+            © 2026 Anthony Milton & Clara Shikhelman. All rights reserved.
           </p>
         </div>
       </Container>
