@@ -45,7 +45,6 @@ export default function RootLayout({
         <link rel="manifest" href="/favicon/site.webmanifest" />
         <link rel="shortcut icon" href="/favicon/favicon.ico" />
         <meta name="theme-color" content="#ff006e" />
-        <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
       </head>
       <body
         className={cn(inter.className, "bg-cyber-dark text-white cyber-grid min-h-screen")}
