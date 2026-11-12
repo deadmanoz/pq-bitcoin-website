@@ -1,0 +1,46 @@
+import Container from "@/app/_components/container";
+import { HeroPost } from "@/app/_components/hero-post";
+import { Intro } from "@/app/_components/intro";
+import { MoreStories } from "@/app/_components/more-stories";
+import { getAllPosts } from "@/lib/api";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Research Archive | Post-Quantum Bitcoin",
+  description:
+    "2025–2026 research articles, vulnerability assessments, and conference presentations on Bitcoin and quantum computing.",
+};
+
+export default function ArchivePage() {
+  const allPosts = getAllPosts();
+
+  const heroPost = allPosts[0];
+
+  const morePosts = allPosts.slice(1);
+
+  return (
+    <main>
+      <Container>
+        <Intro />
+        {heroPost && (
+          <HeroPost
+            title={heroPost.title}
+            coverImage={heroPost.coverImage}
+            date={heroPost.date}
+            author={heroPost.author}
+            slug={heroPost.slug}
+            excerpt={heroPost.excerpt}
+          />
+        )}
+        {morePosts.length > 0 && <MoreStories posts={morePosts} />}
+        {allPosts.length === 0 && (
+          <div className="text-center py-20">
+            <p className="text-xl text-cyber-cyan/70">
+              No posts yet. Check back soon!
+            </p>
+          </div>
+        )}
+      </Container>
+    </main>
+  );
+}

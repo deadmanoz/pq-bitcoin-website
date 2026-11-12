@@ -2,11 +2,20 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <h2 className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight mb-20 mt-8 flex items-center">
-      <Link href="/" className="neon-cyan hover:neon-pink transition-all duration-300">
+    <header className="mb-20 mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <Link
+        href="/"
+        className="text-2xl md:text-4xl font-bold tracking-tight md:tracking-tighter leading-tight neon-cyan hover:neon-pink transition-all duration-300"
+      >
         Post-Quantum Bitcoin
       </Link>
-    </h2>
+      <Link
+        href="/archive"
+        className="text-sm font-medium text-cyber-cyan/80 hover:text-cyber-pink transition-colors duration-300 self-start sm:self-auto"
+      >
+        &larr; Research Archive
+      </Link>
+    </header>
   );
 };
 
