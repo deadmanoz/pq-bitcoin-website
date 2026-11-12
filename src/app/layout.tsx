@@ -47,9 +47,12 @@ export default function RootLayout({
         <meta name="theme-color" content="#ff006e" />
       </head>
       <body
-        className={cn(inter.className, "bg-cyber-dark text-white cyber-grid min-h-screen")}
+        className={cn(
+          inter.className,
+          "bg-cyber-dark text-white cyber-grid min-h-screen flex flex-col"
+        )}
       >
-        <div className="min-h-screen">{children}</div>
+        <div className="flex-1 flex flex-col">{children}</div>
         <Footer />
       </body>
     </html>

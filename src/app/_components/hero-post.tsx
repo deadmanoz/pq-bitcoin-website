@@ -26,11 +26,11 @@ export function HeroPost({
       </div>
       <div className="md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8 mb-20 md:mb-28">
         <div>
-          <h3 className="mb-4 text-4xl lg:text-5xl leading-tight">
+          <h2 className="mb-4 text-4xl lg:text-5xl leading-tight">
             <Link href={`/posts/${slug}`} className="hover:text-cyber-pink transition-colors duration-300">
               {title}
             </Link>
-          </h3>
+          </h2>
           <div className="mb-4 md:mb-0 text-lg text-cyber-cyan/70">
             <DateFormatter dateString={date} />
           </div>

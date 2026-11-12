@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Index() {
   return (
-    <main className="min-h-[calc(100vh-12rem)] flex flex-col justify-center py-16 md:py-24">
+    <main className="flex-1 flex flex-col justify-center py-10 md:py-12">
       <Container>
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-5xl sm:text-6xl md:text-7xl font-bold tracking-tighter leading-tight text-gradient-cyber animate-pulse-neon mb-6">
