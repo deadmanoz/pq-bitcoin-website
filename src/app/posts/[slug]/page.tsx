@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { getAllPostsIncludingHidden, getPostBySlug } from "@/lib/api";
-import { CMS_NAME } from "@/lib/constants";
 import { getAbsoluteUrl } from "@/lib/url";
 import markdownToHtml from "@/lib/markdownToHtml";
 import Container from "@/app/_components/container";
@@ -55,7 +54,7 @@ export async function generateMetadata(props: Params): Promise<Metadata> {
     return notFound();
   }
 
-  const title = `${post.title} | Next.js Blog Example with ${CMS_NAME}`;
+  const title = `${post.title} | Post-Quantum Bitcoin`;
 
   return {
     title,
