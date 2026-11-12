@@ -66,28 +66,17 @@
 }
 
 /* Nested lists */
-.markdown li ul {
-  @apply mt-2 mb-1 space-y-0.5;
-}
-
+.markdown li ul,
 .markdown li ol {
   @apply mt-2 mb-1 space-y-0.5;
 }
 
-/* Nested list items */
-.markdown li ul li {
-  @apply text-base leading-relaxed;
-}
-
+.markdown li ul li,
 .markdown li ol li {
   @apply text-base leading-relaxed;
 }
 
-/* Override space-y for nested items */
-.markdown ul ul {
-  @apply space-y-0.5;
-}
-
+.markdown ul ul,
 .markdown ol ol {
   @apply space-y-0.5;
 }
@@ -109,42 +98,142 @@
 }
 
 /* Math styling */
-.markdown .math-inline {
-  display: inline !important;
+.markdown :global(.math-inline) {
+  display: inline;
 }
 
-.markdown .math-display {
+.markdown :global(.math-display) {
   display: block;
   text-align: center;
   margin: 1em 0;
 }
 
 /* Figure styling */
-.markdown figure.figure-container {
+.markdown :global(figure.figure-container) {
   @apply my-8 text-center;
 }
 
-.markdown figure.figure-container img {
+.markdown :global(figure.figure-container) img {
   @apply mx-auto mb-2;
 }
 
-.markdown figure.figure-container figcaption {
-  @apply text-sm mt-3 px-4 text-center;
-  color: #00d9ff !important; /* cyber-cyan */
+.markdown :global(figure.figure-container) figcaption {
+  @apply text-sm mt-3 px-4 text-center text-cyber-cyan;
 }
 
-.markdown figure.figure-container figcaption strong {
-  @apply font-bold;
-  color: #ff006e !important; /* cyber-pink */
+.markdown :global(figure.figure-container) figcaption strong {
+  @apply font-bold text-cyber-pink;
 }
 
-.markdown a.figure-ref {
-  @apply font-medium;
-  color: #ff006e !important; /* cyber-pink */
+.markdown :global(a.figure-ref) {
+  @apply font-medium text-cyber-cyan hover:text-cyber-pink;
 }
 
-.markdown a.figure-ref:hover {
-  color: #00d9ff !important; /* cyber-cyan */
+/* Inline tooltip annotations */
+.markdown :global(.annotation) {
+  position: relative;
+  cursor: help;
+  color: #00d9ff;
+  font-weight: 500;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 217, 255, 0.15) 0%,
+    rgba(255, 0, 110, 0.15) 100%
+  );
+  border-bottom: 2px dotted #00d9ff;
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
 }
 
+.markdown :global(.annotation:hover) {
+  color: #ff006e;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 0, 110, 0.2) 0%,
+    rgba(0, 217, 255, 0.2) 100%
+  );
+  border-bottom-color: #ff006e;
+  transform: translateY(-1px);
+}
 
+.markdown :global(.annotation::after) {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-5px);
+  background: #001122;
+  color: #00d9ff;
+  border: 2px solid #00d9ff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  white-space: normal;
+  width: max-content;
+  max-width: 320px;
+  text-align: left;
+  font-weight: normal;
+  text-decoration: none;
+  box-shadow:
+    0 8px 25px rgba(0, 217, 255, 0.4),
+    0 0 0 1px rgba(0, 217, 255, 0.1);
+  z-index: 50;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out,
+    transform 0.3s ease-in-out;
+  pointer-events: none;
+  margin-bottom: 12px;
+}
+
+.markdown :global(.annotation::before) {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 6px;
+  border: 6px solid transparent;
+  border-top-color: #00d9ff;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease-in-out,
+    visibility 0.3s ease-in-out;
+  z-index: 50;
+}
+
+.markdown :global(.annotation:hover::after),
+.markdown :global(.annotation:focus::after) {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.markdown :global(.annotation:hover::before),
+.markdown :global(.annotation:focus::before) {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media (max-width: 768px) {
+  .markdown :global(.annotation::after) {
+    position: fixed;
+    bottom: auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 280px;
+    margin-bottom: 0;
+    font-size: 0.8125rem;
+  }
+
+  .markdown :global(.annotation::before) {
+    display: none;
+  }
+}
